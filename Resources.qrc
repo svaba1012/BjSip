@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/fonts">
+        <file>Resources/Fonts/fa-regular.otf</file>
+        <file>Resources/Fonts/fa-solid.otf</file>
+        <file>Resources/Fonts/fa-brands-solid.otf</file>
+        <file>Resources/Fonts/fontello.ttf</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>Resources/Images/pic1.jpg</file>
+        <file>Resources/Images/logo1.jpg</file>
+    </qresource>
+    <qresource prefix="/scripts">
+        <file>Utils/changeBrightness.js</file>
+        <file>Models/local-storage.js</file>
+        <file>Models/user-model.js</file>
+        <file>Models/call-history-model.js</file>
+        <file>Models/contact-model.js</file>
+        <file>Utils/getBuddiesUsernames.js</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>Resources/Sounds/ringtone01.mp3</file>
+        <file>Resources/Sounds/outgoing-call-tone01.mp3</file>
+    </qresource>
+</RCC>
