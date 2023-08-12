@@ -85,9 +85,14 @@ Rectangle {
                 textColor: theme.backgroundColor
                 color: theme.dangerColor
                 symbol: "\uf879"
+                onClick: () => {
+                    //!!! NOT TESTED
+                    bjSip.hangOnOngoingCall();
+                    //!!! NOT TESTED
+                    mainView.replace(callEndedView)
+                }
             }
         }
-
     }
 
     ParallelAnimation{

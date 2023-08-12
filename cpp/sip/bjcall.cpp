@@ -1,17 +1,24 @@
 #include "bjcall.h"
 
 BjCall::BjCall(Account &acc,BjSip* bjSip, int call_id) : Call(acc, call_id){
-    wav_player = NULL;
-    med_port = NULL;
+//    wav_player = NULL;
+//    med_port = NULL;
     myAcc = (BjAccount *)&acc;
     this->bjSip = bjSip;
+    this->aud_med = NULL;
+    this->speaker_media = &Endpoint::instance().audDevManager().getPlaybackDevMedia();
+    this->mic_media = &Endpoint::instance().audDevManager().getCaptureDevMedia();
 }
 
 BjCall::~BjCall(){
-    if (wav_player)
-        delete wav_player;
-    if (med_port)
-        delete med_port;
+//    if (wav_player)
+//        delete wav_player;
+//    if (med_port)
+//        delete med_port;
+    if (aud_med){
+//        this->mic_media->stopTransmit(*this->aud_med);
+//        this->aud_med->stopTransmit(*this->speaker_media);
+    }
 }
 
 
@@ -22,8 +29,50 @@ void BjCall::onCallState(OnCallStateParam &prm){
     std::cout << "*** Call: " <<  ci.remoteUri << " [" << ci.stateText
               << "]" << std::endl;
 
+    pjsip_status_code status = ci.lastStatusCode;
+    std::cout << "---Code---" << status << "---Code---" <<std::endl;
+
+    if(this->bjSip->hasIncomingCall && this->bjSip->bjCall == NULL){
+        if(status == PJSIP_SC_REQUEST_TERMINATED || status == PJSIP_SC_REJECTED){
+            this->bjSip->setHasIncomingCall(false);
+            delete this->bjSip->incomingCall;
+            this->bjSip->incomingCall = NULL;
+        }
+        return;
+    }
+
+
+    if(this != this->bjSip->incomingCall && this != this->bjSip->bjCall){
+        //this call is not ongoing
+        return;
+    }
+
+
+
+    this->bjSip->setCallStatus(status);
+
     if (ci.state == PJSIP_INV_STATE_DISCONNECTED) {
         emit this->bjSip->callDeclined();
+//        if(status == 480 || status == 486 || status == 487 || status == 503 || status == 603){
+//            emit this->bjSip->busyBuddyCalled();
+//        }
+
+        if(this->bjSip->bjCall != NULL){
+            delete this->bjSip->bjCall;
+            this->bjSip->bjCall = NULL;
+        }
+        if(this->bjSip->incomingCall != NULL){
+            delete this->bjSip->incomingCall;
+            this->bjSip->incomingCall = NULL;
+            this->bjSip->setHasIncomingCall(false);
+        }
+
+
+
+//        CallOpParam prm;
+//        prm.statusCode = (pjsip_status_code)603;
+//        this->bjSip->bjAccount->incomingCall->hangup(prm);
+
         //myAcc->removeCall(this);
         /* Delete the call */
         //delete this;
@@ -90,16 +139,29 @@ void BjCall::onCallMediaState(OnCallMediaStateParam &prm){
 
     CallInfo ci = getInfo();
 
-    for (unsigned i = 0; i < ci.media.size(); i++) {
-        if (ci.media[i].type==PJMEDIA_TYPE_AUDIO && getMedia(i)) {
-            AudioMedia *aud_med = (AudioMedia *)getMedia(i);
+//    for (unsigned i = 0; i < ci.media.size(); i++) {
+//        if (ci.media[i].type==PJMEDIA_TYPE_AUDIO && getMedia(i)) {
+//            this->aud_med = (AudioMedia *)getMedia(i);
 
-            // Connect the call audio media to sound device
-            AudDevManager& mgr = Endpoint::instance().audDevManager();
-            aud_med->startTransmit(mgr.getPlaybackDevMedia());
-            mgr.getCaptureDevMedia().startTransmit(*aud_med);
+//            // Connect the call audio media to sound device
+//            AudDevManager &mgr = Endpoint::instance().audDevManager();
+//            this->aud_med->startTransmit(mgr.getPlaybackDevMedia());
+//            mgr.getCaptureDevMedia().startTransmit(*this->aud_med);
+//        }
+//    }
+
+    for (unsigned i=0; i<ci.media.size(); ++i) {
+        if (ci.media[i].type == PJMEDIA_TYPE_AUDIO) {
+            this->aud_med = (AudioMedia *)this->getMedia(i);
+            break;
         }
     }
+
+    if (aud_med) {
+        this->mic_media->startTransmit(*this->aud_med);
+        this->aud_med->startTransmit(*this->speaker_media);
+    }
+
 
 }
 

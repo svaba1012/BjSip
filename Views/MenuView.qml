@@ -14,11 +14,13 @@ Rectangle {
     z: 11
 
     CustomTabView{
-        anchors.fill: parent
+        id: menuTab
+        height:  parent.height
+//        potencialWidth: parent.width
         clip: true
         tabs: [
-            {label: "Contacts", id: contacts, iconSymbol: "\uf0c0"},
-            {label: "Call History", id: callHistory, iconSymbol: "\uf1da"}
+            {label: qsTr("Contacts") + bjSip.emptyString, id: contacts, iconSymbol: "\uf0c0"},
+            {label: qsTr("Call History") + bjSip.emptyString, id: callHistory, iconSymbol: "\uf1da"}
         ]
         ContactList{
             id: contacts

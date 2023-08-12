@@ -9,6 +9,14 @@ Row {
     id: desktopView
     anchors.fill: parent
 
+    Component.onCompleted: () => {
+       if(!visible){
+           return;
+       }
+        appState.optionView = settingsView
+        appState.mainView = mainView
+    }
+
     MenuView{
         id: menuView
         initialWidth: desktopView.width * 0.4
@@ -24,27 +32,34 @@ Row {
         height: desktopView.height
         replaceEnter: null
         replaceExit: null
-        initialItem: callEndedView
+        initialItem: settingsView
+
         Component{
             id: callView
-            CallView{}
+            CallView{
+                color: theme.backgroundColor
+                property bool isInCall: true
+            }
         }
         Component{
             id: callEndedView
-            CallEnded{}
+            CallEnded{color: theme.backgroundColor}
         }
         Component{
             id: addNewContactView
-            AddNewContact{}
+            AddNewContact{color: theme.backgroundColor}
         }
         Component{
             id: startView
-            Rectangle{}
+            Rectangle{color: theme.backgroundColor}
+        }
+        Component{
+            id: settingsView
+            SettingView{color: theme.backgroundColor}
         }
     }
 
     IncomingCallPopup{
         visible: bjSip.hasIncomingCall
     }
-
 }

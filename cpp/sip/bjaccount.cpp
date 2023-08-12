@@ -6,26 +6,27 @@ BjAccount::BjAccount(BjSip* bjSip){
 
 
 BjAccount::~BjAccount(){
-    std::cout << "*** Account is being deleted: No of calls="
-              << calls.size() << std::endl;
+    this->shutdown();
+//    std::cout << "*** Account is being deleted: No of calls="
+//              << calls.size() << std::endl;
 
-    for (std::vector<Call *>::iterator it = calls.begin();
-         it != calls.end(); )
-    {
-        delete (*it);
-        it = calls.erase(it);
-    }
+//    for (std::vector<Call *>::iterator it = calls.begin();
+//         it != calls.end(); )
+//    {
+//        delete (*it);
+//        it = calls.erase(it);
+//    }
 }
 
 void BjAccount::removeCall(Call *call){
-    for (std::vector<Call *>::iterator it = calls.begin();
-         it != calls.end(); ++it)
-    {
-        if (*it == call) {
-            calls.erase(it);
-            break;
-        }
-    }
+//    for (std::vector<Call *>::iterator it = calls.begin();
+//         it != calls.end(); ++it)
+//    {
+//        if (*it == call) {
+//            calls.erase(it);
+//            break;
+//        }
+//    }
 }
 
 void BjAccount::onRegState(OnRegStateParam &prm){
@@ -43,9 +44,17 @@ void BjAccount::onIncomingCall(OnIncomingCallParam &iprm){
 //              << ci.stateText << "]" << std::endl;
 
 //    prm.statusCode = (pjsip_status_code)200;
-    calls.push_back(call);
-    this->incomingCall = call;
-    this->bjSip->setIncomingBuddyUri(ci.remoteUri);
+//    calls.push_back(call);
+    if(this->bjSip->hasIncomingCall || this->bjSip->bjCall != NULL){
+        CallOpParam prm;
+        prm.statusCode = PJSIP_SC_BUSY_HERE;
+        call->hangup(prm);
+        delete call;
+        return;
+    }
+    this->bjSip->incomingCall = call;
     this->bjSip->setHasIncomingCall(true);
+    this->bjSip->setIncomingBuddyUri(ci.remoteUri);
+    this->bjSip->setIncomingBuddyExtension(stoi(ci.remoteUri.substr(1,1)));
 //    call->answer(prm);
 }

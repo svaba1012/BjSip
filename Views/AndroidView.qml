@@ -8,24 +8,40 @@ import "../Components/Users"
 StackView{
     id: mainView
     anchors.fill: parent
-    initialItem: callView
+    initialItem: menuView
+    replaceEnter: null
+    replaceExit: null
+    Component.onCompleted: () => {
+        if(!visible){
+            return;
+        }
+        appState.optionView = settingsView
+        appState.mainView = mainView
+    }
     Component{
         id: menuView
         MenuView{}
     }
     Component{
         id: callView
-        CallView{}
+        CallView{
+            property bool isInCall: true
+        }
     }
     Component{
         id: callEndedView
-        CallEnded{}
+        CallEnded{color: theme.backgroundColor}
     }
     Component{
         id: addNewContactView
         AddNewContact{
+            color: theme.backgroundColor
             withBack: true
         }
+    }
+    Component{
+        id: settingsView
+        SettingView{color: theme.backgroundColor}
     }
 }
 

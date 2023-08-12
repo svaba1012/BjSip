@@ -7,8 +7,10 @@ Rectangle {
     property var tabLabels
     property var tabs
     property int currentIndex: -1
-
-    color: "red"
+//    property int minWidth: tabBar.width
+    property int potencialWidth: 0
+    width: parent.width
+//    width: potencialWidth > minWidth ? potencialWidth : minWidth
 
     Column{
         width: parent.width
@@ -27,27 +29,15 @@ Rectangle {
                     tabView: tabBox
                     stackView: view
                     height: 50
-                    width: tabBox.width / tabs.length
+                  width: tabBox.width / tabs.length
                 }
             }
         }
-        Row{
-            id: borderLine
-            height: 4
-            Repeater{
-                model: tabs.length
-                Rectangle{
-                    required property int index
-                    height: 4
-                    width: tabBox.width / tabs.length
-                    color: index === currentIndex ? theme.successColor : theme.accentColor
-                }
-            }
-        }
+
         Rectangle{
             height: tabBox.height - tabBar.height // - borderLine.height
             width: parent.width
-            color: theme.backgroundColor
+            color: theme.menuColor
             StackView{
                 id: view
                 anchors.fill: parent

@@ -11,7 +11,7 @@ const getContacts = (creatorId) => {
     let db = Db.getDb();
     let records = [];
     db.readTransaction(function(tx) {
-        let result = tx.executeSql('SELECT * FROM Contacts WHERE creator_user_id = ?', [creatorId]);
+        let result = tx.executeSql('SELECT * FROM Contacts WHERE creator_user_id = ? ORDER BY contact_name', [creatorId]);
         for (var i = 0; i < result.rows.length; i++) {
             var record = result.rows.item(i);
             records.push(record);

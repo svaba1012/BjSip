@@ -3,6 +3,7 @@ import QtQuick.Window
 import QtQuick.LocalStorage
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtMultimedia
 
 import "./Views"
 import "./Components/Reusables"
@@ -32,33 +33,14 @@ ApplicationWindow {
         id: appState
     }
 
+    onClosing: () => console.log("Closing")
+
     //init localstorage database
     Component.onCompleted: Db.initDb()
     Column{
         anchors.fill: parent
-        Rectangle{
-            color: theme.accentColor
-            width: parent.width
+        AppBar{
             height: 30
-            RowLayout{
-                width: parent.width
-                CustomText{
-                    text: "BjSip"
-                    font.pointSize: 18
-                    Layout.leftMargin: 10
-                }
-                Item{
-                    Layout.fillWidth: true
-                }
-                RoundedButton{
-                    Layout.alignment: Qt.AlignRight
-                    Layout.rightMargin: 10
-                    iconSize: 1
-                    size: 20
-                    symbol: "\uf013"
-                }
-            }
-
         }
         StackView{
             id: appView

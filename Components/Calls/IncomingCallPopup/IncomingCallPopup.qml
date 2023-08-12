@@ -9,8 +9,11 @@ import "../CallAnswerButton"
 Popup {
     id: popup
     property bool isOnScreen: true
-    property real positionOffset: 120//popup.height + 20
+    property real positionOffset: 160 //popup.height + 20
     property int animationDuration: 300
+    property var callerContact:
+        appState.contacts.find(contact => contact.extension == bjSip.incomingBuddyExtension)
+
     x: (appWindow.width - popup.width) - 20
     y: appWindow.height - positionOffset
 
@@ -20,7 +23,7 @@ Popup {
     topPadding: 2
     padding: 10
     background: Rectangle{
-        color: theme.accentColor
+        color: theme.primaryColor
         radius: 5
     }
 
@@ -30,14 +33,14 @@ Popup {
             id:headerRow
             width: parent.width
             CustomText{
-                text: "Incoming call..."
+                text: qsTr("Incoming call...") + bjSip.emptyString
             }
             Item{
                 Layout.fillWidth: true
             }
             Rectangle{
                 id: slideBox
-                color: theme.accentColor
+                color: theme.primaryColor
                 width: 40
                 height: width
                 radius: 5
@@ -72,9 +75,11 @@ Popup {
 
         RowLayout{
             id: callRow
-            Avatar{}
+            Avatar{
+                alt: callerContact.contact_name
+            }
             CustomText{
-                text: bjSip.incomingBuddyUri
+                text: callerContact.contact_name
                 rightPadding: 30
             }
             RoundedButton{
@@ -88,22 +93,29 @@ Popup {
             }
             CallAnswerButton{
                 onClick: () => {
-                    //NOT TESTED
-
-                    console.log(bjSip.incomingBuddyUri)
-                    let extension = bjSip.incomingBuddyUri.substring(1,1);
-                    //find contact with that extension
-                    //push contact into buddies
-
-                    //NOT TESTED
+                    appState.buddies = [];
+                    appState.buddies.push(callerContact);
+                    mainView.replace(callView)
                     bjSip.answerIncomingCall()
                     ringtone.stop()
-                    mainView.replace(callView)
                 }
             }
         }
     }
 
+    function handleOnHasIncomingCallChanged(){
+        if(bjSip.hasIncomingCall){
+            ringtone.play()
+        }else{
+            ringtone.stop()
+        }
+    }
+
+
+    Connections{
+        target: bjSip
+        onHasIncomingCallChanged: handleOnHasIncomingCallChanged()
+    }
 
     MediaPlayer{
         id: ringtone
@@ -113,7 +125,7 @@ Popup {
         }
         source: "/sounds/Resources/Sounds/ringtone01.mp3"
     }
-    onOpened: () => ringtone.play()
+//    onOpened: () => ringtone.play()
 
     ParallelAnimation{
         id: slideOutAnim

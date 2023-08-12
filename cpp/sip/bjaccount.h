@@ -13,9 +13,9 @@ class BjSip;
 
 class BjAccount :  public Account {
     public:
-        std::vector<Call *> calls;
-        Call* incomingCall;
-        bool hasIncomingCall;
+//        std::vector<Call *> calls;
+//        Call* incomingCall;
+//        bool hasIncomingCall;
         BjSip* bjSip;
     public:
         BjAccount(BjSip* bjSip);

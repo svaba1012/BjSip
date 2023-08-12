@@ -1,10 +1,11 @@
 import QtQuick
 import QtQuick.Controls
 
+
 Column{
     property string label: ""
-    property alias echoMode: textField.echoMode
-    property alias value: textField.text
+    property var list
+    property var onElementSelected
     spacing: 2
     Text {
         visible: label.length > 0
@@ -12,8 +13,8 @@ Column{
         font.family: globalFont
         color: theme.textColor
     }
-    TextField {
-        id: textField
-        width: parent.width
+    ComboBox{
+        model: list
+        onActivated: () => onElementSelected(currentIndex)
     }
 }

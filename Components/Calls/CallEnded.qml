@@ -6,6 +6,25 @@ import "../Reusables"
 import "/scripts/Utils/getBuddiesUsernames.js" as Buddy
 
 Rectangle {
+    function mapStatusCodeToText(code){
+        console.log(code)
+        if(code === 480){
+            return qsTr("User temporarily unavailable") + bjSip.emptyString;
+        }
+        if(code === 486){
+            return qsTr("User is busy") + bjSip.emptyString;
+        }
+        if(code === 487){
+            return qsTr("No answer") + bjSip.emptyString;
+        }
+        if(code === 503){
+            return qsTr("User is offline") + bjSip.emptyString;
+        }
+        if(code === 603){
+            return qsTr("Call declined") + bjSip.emptyString;
+        }
+        return qsTr("Call ended") + bjSip.emptyString;
+    }
     Column{
         padding: 50
         anchors.horizontalCenter: parent.horizontalCenter
@@ -14,18 +33,18 @@ Rectangle {
             id: avatarGroup
             avatarSize: 80
             anchors.horizontalCenter: parent.horizontalCenter
-            alts: appState.contacts.map(buddy => buddy.contact_name)
+            alts: appState.buddies.map(buddy => buddy.contact_name)
             maxNum: 3
         }
         CustomText{
             font.pointSize: 16
             anchors.horizontalCenter: parent.horizontalCenter
-            text: Buddy.getBuddiesUsernames(appState.contacts, avatarGroup.maxNum)
+            text: Buddy.getBuddiesUsernames(appState.buddies, avatarGroup.maxNum)
         }
         CustomText{
             anchors.horizontalCenter: parent.horizontalCenter
             //status of ended call
-            text: "Call rejected"
+            text:   mapStatusCodeToText(bjSip.callStatus)
         }
     }
     RowLayout{
@@ -47,7 +66,7 @@ Rectangle {
             }
             CustomText{
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Exit"
+                text: qsTr("Exit") + bjSip.emptyString
             }
         }
 
@@ -60,13 +79,13 @@ Rectangle {
                 textColor: theme.backgroundColor
                 onClick: () => {
                     //Change later
-//                    bjSip.makeCall(appState.contacts[0]);
+                    bjSip.makeCall(appState.buddies[0].extension);
                     mainView.replace(callView);
                 }
             }
             CustomText{
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Call again"
+                text: qsTr("Call again") + bjSip.emptyString
             }
         }
     }

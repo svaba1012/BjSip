@@ -37,7 +37,7 @@ ScrollView{
                     color: theme.accentColor
                 }
                 CustomText{
-                    text: "Add new contact"
+                    text: qsTr("Add new contact") + bjSip.emptyString
                     font.pointSize: 12
                     color: theme.accentColor
                 }

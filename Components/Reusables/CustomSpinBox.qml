@@ -7,7 +7,7 @@ Column{
     spacing: 2
     Text {
         visible: label.length > 0
-        text: qsTr(label)
+        text: label
         font.family: globalFont
         color: theme.textColor
     }

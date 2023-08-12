@@ -4,6 +4,7 @@
 #include <QQmlContext>
 #include <iostream>
 
+
 #include "./cpp/sip/bjsip.h"
 
 using namespace std;
@@ -22,6 +23,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     BjSip bjSip;
+    bjSip.setApp(&app);
 
     engine.rootContext()->setContextProperty("bjSip", &bjSip);
 

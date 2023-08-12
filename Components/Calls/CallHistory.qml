@@ -14,7 +14,7 @@ ScrollView{
         topPadding: 5
         spacing: 5
         Repeater{
-            model: 25
+            model: 0//25
             CallHistoryItem{}
         }
     }

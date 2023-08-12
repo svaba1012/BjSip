@@ -10,15 +10,15 @@ Grid{
         }
     }
 
-    rows: calcNumOfRows(appState.contacts.length)
-    columns: appState.contacts.length / rows
+    rows: calcNumOfRows(appState.buddies.length)
+    columns: appState.buddies.length / rows
     anchors.fill: parent
 
     Repeater{
-        model: appState.contacts
+        model: appState.buddies
         VoiceCallUserBox{
             required property int index;
-            buddy: appState.contacts[index]
+            buddy: appState.buddies[index]
         }
     }
 }

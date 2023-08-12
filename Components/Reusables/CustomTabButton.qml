@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
+
 Rectangle {
     required property int i
     required property var tabView
@@ -8,11 +9,13 @@ Rectangle {
     property var stackView
     property alias text: label.text
     property string iconSymbol: ""
+    property int minWidth: label.width + 20
+    property int potencialWidth: 0
 
-    color: theme.accentColor
-
+    width: potencialWidth > minWidth ? potencialWidth : minWidth
+    color: theme.primaryColor
     Column{
-        width: parent.width
+        width: label.width
         anchors.centerIn: parent
         spacing: 3
         Icon{
@@ -28,6 +31,12 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             color: tabView.currentIndex === i ? theme.successColor : theme.textColor
         }
+    }
+    Rectangle{
+        anchors.bottom: parent.bottom
+        height: 4
+        width: parent.width
+        color: index === currentIndex ? theme.successColor : theme.textColor
     }
     MouseArea{
         anchors.fill: parent

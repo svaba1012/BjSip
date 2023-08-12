@@ -9,10 +9,10 @@ Row {
         spacing: 2
         anchors.verticalCenter: parent.verticalCenter
         Text {
-            text: qsTr("username")
+            text: "username"
         }
         Text {
-            text: qsTr("timeOfCall")
+            text: "timeOfCall"
         }
     }
 }

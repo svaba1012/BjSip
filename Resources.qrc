@@ -20,5 +20,10 @@
     <qresource prefix="/sounds">
         <file>Resources/Sounds/ringtone01.mp3</file>
         <file>Resources/Sounds/outgoing-call-tone01.mp3</file>
+        <file>Resources/Sounds/busy-ringtone-1.mp3</file>
+    </qresource>
+    <qresource prefix="/translation">
+        <file>translationSR.qm</file>
+        <file>translationSRC.qm</file>
     </qresource>
 </RCC>

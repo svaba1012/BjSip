@@ -10,7 +10,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick )
+find_package(Qt6 6.4 REQUIRED COMPONENTS Core Quick LinguistTools )
+#qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} translationSRC.ts)
+#configure_file(${QM_FILES} ${CMAKE_SOURCE_DIR} COPYONLY)
 
 #add pkgconfig tool for linking pjsip lib
 INCLUDE(FindPkgConfig)
@@ -30,20 +32,10 @@ qt_standard_project_setup()
 
 qt_add_executable(appbjSip
     main.cpp
-    cpp/sip/proba.cpp
-    cpp/sip/bjuser.h cpp/sip/bjuser.cpp
     cpp/sip/bjendpoint.h cpp/sip/bjendpoint.cpp
     cpp/sip/bjcall.h cpp/sip/bjcall.cpp
     cpp/sip/bjaudiomediaport.h cpp/sip/bjaudiomediaport.cpp
     cpp/sip/bjaccount.h cpp/sip/bjaccount.cpp
-#    cpp/bcrypt/qtbcrypt.h cpp/bcrypt/qtbcrypt.cpp
-#    cpp/bcrypt/bcrypt.h cpp/bcrypt/bcrypt.cpp
-#    cpp/bcrypt/openwall_crypt/crypt_blowfish.h cpp/bcrypt/openwall_crypt/crypt_blowfish.c
-#    cpp/bcrypt/openwall_crypt/crypt_gensalt.h cpp/bcrypt/openwall_crypt/crypt_gensalt.c
-#    cpp/bcrypt/openwall_crypt/crypt.h
-#    cpp/bcrypt/openwall_crypt/ow-crypt.h
-#    cpp/bcrypt/openwall_crypt/wrapper.c
-#    cpp/bcrypt/openwall_crypt/x86.S
     cpp/sip/bjsip.h cpp/sip/bjsip.cpp
 
     Models/local-storage.js
@@ -53,6 +45,7 @@ qt_add_executable(appbjSip
     Utils/changeBrightness.js
     Utils/getBuddiesUsernames.js
     Resources.qrc
+    ${QM_FILES}
 )
 
 
@@ -60,13 +53,14 @@ qt_add_qml_module(appbjSip
     URI bjSip
     VERSION 1.0
     QML_FILES   Main.qml
-                Resources.qrc
                 ./Views/MenuView.qml
                 ./Views/AndroidView.qml
                 ./Views/DesktopView.qml
                 ./Views/LoginView.qml
                 ./Views/RegisterView.qml
                 ./Views/CallView.qml
+                ./Views/SettingView.qml
+                ./Views/AppBar.qml
                 ./Components/Reusables/FontAwesomeIcons.qml
                 ./Components/Reusables/ColorTheme.qml
                 ./Components/Reusables/Icon.qml
@@ -77,6 +71,7 @@ qt_add_qml_module(appbjSip
                 ./Components/Reusables/CustomText.qml
                 ./Components/Reusables/CustomTabView.qml
                 ./Components/Reusables/CustomTabButton.qml
+                ./Components/Reusables/CustomComboBox.qml
                 ./Components/Reusables/AvatarGroup.qml
                 ./Components/Reusables/RoundedButton.qml
                 ./Components/Reusables/Circle.qml
@@ -98,6 +93,7 @@ qt_add_qml_module(appbjSip
                 ./Components/Calls/CallEnded.qml
                 ./Components/Calls/IncomingCallPopup/IncomingCallPopup.qml
                 ./Models/AppState.qml
+                Resources.qrc
 )
 
 set_target_properties(appbjSip PROPERTIES

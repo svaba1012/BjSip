@@ -13,13 +13,13 @@ Item {
         spacing: 20
         CustomTextField{
             id: username
-            label: "Username"
+            label: qsTr("Username") + bjSip.emptyString
             width: parent.width
         }
 
         CustomTextField{
             id: password
-            label: "Password"
+            label: qsTr("Password") + bjSip.emptyString
             echoMode: TextInput.Password
             width: parent.width
         }
@@ -28,23 +28,26 @@ Item {
             viewName: registerView
             CustomText{
                 color: theme.accentColor
-                text: "Register"
+                text: qsTr("Register") + bjSip.emptyString
             }
         }
 
         CustomButton{
-            width: 100
-            height: 40
+
             col: theme.successColor
             textColor: theme.textColor
-            text: "Login"
+            text: qsTr("Login") + bjSip.emptyString
             anchors.horizontalCenter: parent.horizontalCenter
-            onClick: () => {
+            function submit(){
                 appState.user = UserModel.loginUser(username.value, password.value)
                 bjSip.registerAccount(appState.user.extension);
                 console.log(appState.user.username)
                 appView.replace(mainView)
             }
+            onClick: () => submit()
+
+//            Keys.onEnterPressed: () => submit()
+//            Keys.onReturnPressed: () => submit()
         }
     }
 }

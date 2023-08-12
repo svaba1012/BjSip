@@ -7,14 +7,17 @@ Rectangle {
     property alias text: textBox.text
     property string textColor: theme.textColor
     property string col
-    height: 30
     radius: height / 4
     scale: mouseArea.containsMouse ? 1.02 : 1
     color: mouseArea.containsMouse ? ColorJs.changeBrightness(col, -0.05) : col
+
+    width: textBox.width * 1.3
+    height: textBox.height * 2
+
     Text{
         //warning here
-        font.pointSize: Math.ceil(height * 0.7)
         id: textBox
+        font.pointSize: Math.ceil(height * 0.7)
         color: textColor
         font.family: globalFont
         anchors.centerIn: parent

@@ -5,4 +5,6 @@ Item {
     property var user: ({})
     property var contacts: []
     property var buddies: []
+    property var optionView
+    property var mainView
 }

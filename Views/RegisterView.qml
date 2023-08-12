@@ -13,26 +13,26 @@ Item {
         spacing: 20
         CustomTextField{
             id: username
-            label: "Username"
+            label: qsTr("Username") + bjSip.emptyString
             width: parent.width
         }
 
         CustomSpinBox{
             id: extension
-            label: "Extension"
+            label: qsTr("Extension") + bjSip.emptyString
             width: parent.width
         }
 
         CustomTextField{
             id: pass1
-            label: "Password"
+            label: qsTr("Password") + bjSip.emptyString
             echoMode: TextInput.Password
             width: parent.width
         }
 
         CustomTextField{
             id: pass2
-            label: "Repeat Password"
+            label: qsTr("Repeat Password") + bjSip.emptyString
             echoMode: TextInput.Password
             width: parent.width
         }
@@ -41,16 +41,15 @@ Item {
             viewName: loginView
             CustomText{
                 color: theme.accentColor
-                text: "Login"
+                text: qsTr("Login") + bjSip.emptyString
             }
         }
 
         CustomButton{
-            width: 100
-            height: 40
+
             col: theme.successColor
             textColor: theme.textColor
-            text: "Register"
+            text: qsTr("Register")
             anchors.horizontalCenter: parent.horizontalCenter
             onClick: () => {
                 if(pass1.value !== pass2.value){

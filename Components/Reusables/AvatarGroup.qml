@@ -11,7 +11,7 @@ Rectangle {
 
     width: avatarSize * ((1 - intersect) * (num - 1) + 1)
     height:  avatarSize
-
+    color: theme.backgroundColor
     Repeater{
         model: num
         Avatar{

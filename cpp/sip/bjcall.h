@@ -17,8 +17,12 @@ class BjCall : public Call{
     private:
         BjAccount *myAcc;
         BjSip* bjSip;
-        AudioMediaPlayer *wav_player;
-        AudioMediaPort *med_port;
+//        AudioMediaPlayer *wav_player;
+//        AudioMediaPort *med_port;
+        AudioMedia *aud_med;
+
+        AudioMedia* speaker_media;
+        AudioMedia* mic_media;
 
     public:
         BjCall(Account &acc, BjSip* bjSip, int call_id = PJSUA_INVALID_ID);

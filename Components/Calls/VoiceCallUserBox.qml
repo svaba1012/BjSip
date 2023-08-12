@@ -6,7 +6,7 @@ Rectangle {
     width: parent.width/parent.columns
     height: parent.height/parent.rows
     border.width: 2
-    border.color: theme.textColor
+    border.color: theme.secondaryColor
     Column{
         anchors.centerIn: parent
         spacing: 10
