@@ -33,25 +33,34 @@ Rectangle{
         visible: isAddingContact
     }
     Column{
-        width: 200
+        width: 300
         anchors.centerIn: parent
         spacing: 20
         visible: !isAddingContact
+        CustomText{
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("New contact")
+            font.pointSize: 18
+        }
         CustomTextField{
             id: contactName
             label: qsTr("Contact Name") + bjSip.emptyString
             width: parent.width
+            icon: "\uf007"
         }
         CustomSpinBox{
             id: extension
             label: qsTr("Extension") + bjSip.emptyString
             width: parent.width
+            icon: "\uf095"
         }
         CustomButton{
             col: theme.successColor
             textColor: theme.textColor
             text: qsTr("Add Contact") + bjSip.emptyString
             anchors.horizontalCenter: parent.horizontalCenter
+            preferredWidth: 0.6 * parent.width
+            fontSize: 16
             onClick: () => {
                 ContactModel.addContact(contactName.value, extension.value, appState.user.user_id);
                 console.log("Implement later and check what to do");

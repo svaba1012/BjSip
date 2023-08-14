@@ -40,12 +40,12 @@ ApplicationWindow {
     Column{
         anchors.fill: parent
         AppBar{
-            height: 30
+            height: 50
         }
         StackView{
             id: appView
             width: parent.width
-            height: parent.height - 30
+            height: parent.height - 50
             initialItem: loginView
             Component{
                 id: loginView

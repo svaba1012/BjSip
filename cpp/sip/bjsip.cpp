@@ -56,7 +56,7 @@ BjSip::~BjSip(){
 
 void BjSip::setApp(QGuiApplication* app){
     this->app = app;
-    this->srCyTranslator.load(":/translation/translationSRC");
+    this->srCyTranslator.load(":/translation/translationSRC.qm");
     app->installTranslator(&this->srCyTranslator);
 }
 
@@ -128,10 +128,10 @@ void BjSip::changeLanguage(QString language){
         app->removeTranslator(&this->srCyTranslator);
         app->removeTranslator(&this->srLatTranslator);
     }else if(language == QString("src")){
-        this->srCyTranslator.load(":/translation/translationSRC");
+        this->srCyTranslator.load(":/translation/translationSRC.qm");
         app->installTranslator(&this->srCyTranslator);
     }else if(language == QString("sr")){
-        this->srLatTranslator.load(":/translation/translationSR");
+        this->srLatTranslator.load(":/translation/translationSR.qm");
         app->installTranslator(&this->srLatTranslator);
     }
     emit languageChanged();

@@ -30,16 +30,17 @@ ScrollView{
             anchors.horizontalCenter: parent.horizontalCenter
             Row{
                 height: parent.height
+                anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 5
                 Icon{
                     symbol: "\uf234"
                     font.pointSize: 12
-                    color: theme.accentColor
+                    color: theme.primaryColor
                 }
                 CustomText{
                     text: qsTr("Add new contact") + bjSip.emptyString
                     font.pointSize: 12
-                    color: theme.accentColor
+                    color: theme.primaryColor
                 }
             }
         }

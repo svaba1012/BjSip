@@ -7,7 +7,7 @@ Grid{
             return 1;
         }else if(numOfUsers < 7){
             return 2;
-        }
+        }popup.height + 20
     }
 
     rows: calcNumOfRows(appState.buddies.length)

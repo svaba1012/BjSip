@@ -7,7 +7,7 @@ Circle {
     property alias source: accImage.source
     property string alt: "User"
     r: size
-    color: theme.accentColor
+    color: theme.primaryColor
 
 
     Image {

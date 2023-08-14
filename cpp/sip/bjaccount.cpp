@@ -55,6 +55,6 @@ void BjAccount::onIncomingCall(OnIncomingCallParam &iprm){
     this->bjSip->incomingCall = call;
     this->bjSip->setHasIncomingCall(true);
     this->bjSip->setIncomingBuddyUri(ci.remoteUri);
-    this->bjSip->setIncomingBuddyExtension(stoi(ci.remoteUri.substr(1,1)));
+    this->bjSip->setIncomingBuddyExtension(stoi(ci.remoteUri.substr(1,2)));
 //    call->answer(prm);
 }

@@ -11,7 +11,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Core Quick LinguistTools )
-#qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} translationSRC.ts)
+#qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} translationSR.ts)
 #configure_file(${QM_FILES} ${CMAKE_SOURCE_DIR} COPYONLY)
 
 #add pkgconfig tool for linking pjsip lib
@@ -61,6 +61,9 @@ qt_add_qml_module(appbjSip
                 ./Views/CallView.qml
                 ./Views/SettingView.qml
                 ./Views/AppBar.qml
+                ./Components/Forms/LoginForm.qml
+                ./Components/Forms/RegisterForm.qml
+                ./Components/Forms/AddNewContactForm.qml
                 ./Components/Reusables/FontAwesomeIcons.qml
                 ./Components/Reusables/ColorTheme.qml
                 ./Components/Reusables/Icon.qml
@@ -77,6 +80,8 @@ qt_add_qml_module(appbjSip
                 ./Components/Reusables/Circle.qml
                 ./Components/Reusables/Avatar.qml
                 ./Components/Reusables/QuaterCircle.qml
+                ./Components/Reusables/AppLogo.qml
+                ./Components/Reusables/AppLogoWithText.qml
                 ./Components/Users/ContactList.qml
                 ./Components/Users/ContactListItem.qml
                 ./Components/Users/AddNewContact.qml

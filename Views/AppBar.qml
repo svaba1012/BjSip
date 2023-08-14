@@ -7,13 +7,19 @@ import "../Components/Reusables"
 Rectangle{
     color: theme.primaryColor
     width: parent.width
-
+    z: 100
     RowLayout{
         width: parent.width
+        height: parent.height
+        AppLogo{
+            Layout.leftMargin: 10
+            Layout.preferredHeight: parent.height
+            Layout.preferredWidth: parent.height
+        }
         CustomText{
             text: qsTr("BjSip") + bjSip.emptyString
             font.pointSize: 18
-            Layout.leftMargin: 10
+
         }
 
         Item{

@@ -9,12 +9,27 @@ Rectangle {
     Column{
         topPadding: 10
         width: parent.width
-        CustomText{
+        Row{
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pointSize: 20
-            text: qsTr("Settings") + bjSip.emptyString
             bottomPadding: 30
+            spacing: 8
+            Icon{
+                font.pointSize: 20
+                anchors.verticalCenter: parent.verticalCenter
+                symbol: "\uf013"
+            }
+            CustomText{
+                anchors.verticalCenter: parent.verticalCenter
+                font.pointSize: 20
+                text: qsTr("Settings") + bjSip.emptyString
+            }
+            Icon{
+                font.pointSize: 20
+                anchors.verticalCenter: parent.verticalCenter
+                symbol: "\uf013"
+            }
         }
+
         Rectangle{
             color: theme.textColor
             height: 2
@@ -38,8 +53,9 @@ Rectangle {
                 }
                 Switch{
                     anchors.verticalCenter: parent.verticalCenter
+                    checked: !theme.isLightMode
                     onToggled: () => {
-                        theme.isLightMode = position < 0.5
+                        theme.isLightMode = !checked
                     }
                 }
                 Icon{

@@ -6,8 +6,9 @@
         <file>Resources/Fonts/fontello.ttf</file>
     </qresource>
     <qresource prefix="/images">
-        <file>Resources/Images/pic1.jpg</file>
-        <file>Resources/Images/logo1.jpg</file>
+        <file>Resources/Images/keyLogo.png</file>
+        <file>Resources/Images/planetLogo.png</file>
+        <file>Resources/Images/planetLogo1.png</file>
     </qresource>
     <qresource prefix="/scripts">
         <file>Utils/changeBrightness.js</file>
@@ -23,7 +24,9 @@
         <file>Resources/Sounds/busy-ringtone-1.mp3</file>
     </qresource>
     <qresource prefix="/translation">
-        <file>translationSR.qm</file>
+        <file>translationSR.ts</file>
+        <file>translationSRC.ts</file>
         <file>translationSRC.qm</file>
+        <file>translationSR.qm</file>
     </qresource>
 </RCC>

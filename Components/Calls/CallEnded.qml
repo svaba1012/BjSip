@@ -37,18 +37,19 @@ Rectangle {
             maxNum: 3
         }
         CustomText{
-            font.pointSize: 16
+            font.pointSize: 20
             anchors.horizontalCenter: parent.horizontalCenter
             text: Buddy.getBuddiesUsernames(appState.buddies, avatarGroup.maxNum)
         }
         CustomText{
             anchors.horizontalCenter: parent.horizontalCenter
             //status of ended call
+            font.pointSize: 14
             text:   mapStatusCodeToText(bjSip.callStatus)
         }
     }
     RowLayout{
-        spacing: 100
+        spacing: 90
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         height: 100
@@ -66,6 +67,7 @@ Rectangle {
             }
             CustomText{
                 anchors.horizontalCenter: parent.horizontalCenter
+                font.pointSize: 16
                 text: qsTr("Exit") + bjSip.emptyString
             }
         }
@@ -85,6 +87,7 @@ Rectangle {
             }
             CustomText{
                 anchors.horizontalCenter: parent.horizontalCenter
+                font.pointSize: 16
                 text: qsTr("Call again") + bjSip.emptyString
             }
         }

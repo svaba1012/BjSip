@@ -1,54 +1,22 @@
 import QtQuick
+import QtQuick.Layouts
 
 import "../Components/Reusables"
-
-import "/scripts/Models/user-model.js" as UserModel
+import "../Components/Forms"
 
 
 Item {
-    Column{
-        id: column
-        width: 250
-        anchors.centerIn: parent
-        spacing: 20
-        CustomTextField{
-            id: username
-            label: qsTr("Username") + bjSip.emptyString
-            width: parent.width
+    id: loginView
+    Row{
+        height: parent.height
+        LoginForm{
+            height: loginView.height
+            width: appWindow.width >= 640 ? loginView.width / 2 : loginView.width
         }
-
-        CustomTextField{
-            id: password
-            label: qsTr("Password") + bjSip.emptyString
-            echoMode: TextInput.Password
-            width: parent.width
-        }
-
-        CustomLink{
-            viewName: registerView
-            CustomText{
-                color: theme.accentColor
-                text: qsTr("Register") + bjSip.emptyString
-            }
-        }
-
-        CustomButton{
-
-            col: theme.successColor
-            textColor: theme.textColor
-            text: qsTr("Login") + bjSip.emptyString
-            anchors.horizontalCenter: parent.horizontalCenter
-            function submit(){
-                appState.user = UserModel.loginUser(username.value, password.value)
-                bjSip.registerAccount(appState.user.extension);
-                console.log(appState.user.username)
-                appView.replace(mainView)
-            }
-            onClick: () => submit()
-
-//            Keys.onEnterPressed: () => submit()
-//            Keys.onReturnPressed: () => submit()
+        AppLogoWithText{
+            visible: appWindow.width >= 640
+            width: loginView.width / 2
+            height: loginView.height
         }
     }
 }
-

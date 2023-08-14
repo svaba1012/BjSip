@@ -4,6 +4,7 @@ import QtQuick.Controls
 import "../Components/Calls"
 import "../Components/Users"
 import "../Components/Calls/IncomingCallPopup"
+import "../Components/Reusables"
 
 Row {
     id: desktopView
@@ -32,7 +33,7 @@ Row {
         height: desktopView.height
         replaceEnter: null
         replaceExit: null
-        initialItem: settingsView
+        initialItem: startView
 
         Component{
             id: callView
@@ -51,7 +52,13 @@ Row {
         }
         Component{
             id: startView
-            Rectangle{color: theme.backgroundColor}
+            Rectangle{
+                color: theme.backgroundColor
+                AppLogoWithText{
+                    anchors.centerIn: parent
+                    width: parent.width * 0.6
+                }
+            }
         }
         Component{
             id: settingsView

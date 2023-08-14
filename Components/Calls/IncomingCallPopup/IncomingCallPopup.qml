@@ -9,7 +9,7 @@ import "../CallAnswerButton"
 Popup {
     id: popup
     property bool isOnScreen: true
-    property real positionOffset: 160 //popup.height + 20
+    property real positionOffset: 170 //popup.height + 20
     property int animationDuration: 300
     property var callerContact:
         appState.contacts.find(contact => contact.extension == bjSip.incomingBuddyExtension)
@@ -77,6 +77,7 @@ Popup {
             id: callRow
             Avatar{
                 alt: callerContact.contact_name
+                color: theme.secondaryColor
             }
             CustomText{
                 text: callerContact.contact_name
@@ -133,8 +134,8 @@ Popup {
             target: popup
             property: "positionOffset"
             duration: animationDuration
-            from: popup.height + 20
-            to: 0
+            from: 170
+            to: 50
         }
         RotationAnimation{
             target: slideButton
@@ -157,8 +158,8 @@ Popup {
             target: popup
             property: "positionOffset"
             duration: animationDuration
-            from: 0
-            to: 120
+            from: 50
+            to: 170
         }
         RotationAnimation{
             target: slideButton
